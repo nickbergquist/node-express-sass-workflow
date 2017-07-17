@@ -1,0 +1,67 @@
+﻿// functions
+
+////////////////
+//  palette   //
+////////////////
+
+@function palette-colour($palette, $colour) {
+  @return map-get(map-get($palettes, $palette), $colour);
+}
+
+@function palette-colour-alpha($palette, $colour, $opacity) {
+  $colour: palette-colour($palette, $colour);
+
+  @if map-key-exists($palette-tools, 'opacity', $opacity) {
+    $opacity: map-get(map-get($palette-tools, 'opacity'), $opacity);
+  }
+
+  @return rgba($colour, $opacity);
+}
+
+//////////////////////
+//  typographical   //
+//////////////////////
+
+/// Sets the base font size as a proportion of the default base user-agent font size, generally 16px
+/// @param $base-fs - font size as percentage
+/// @return - base font size as pixels
+@function basefont-to-pixel($base-fs) {
+  // see http://pxtoem.com/
+  @if $base-fs == 37.5% {
+    @return 6;
+  } @else if $base-fs == 43.8% {
+    @return 7;
+  } @else if $base-fs == 50% {
+    @return 8;
+  } @else if $base-fs == 56.3% {
+    @return 9;
+  } @else if $base-fs == 62.5% {
+    @return 10;
+  } @else if $base-fs == 68.8% {
+    @return 11;
+  } @else if $base-fs == 75% {
+    @return 12;
+  } @else if $base-fs == 81.3% {
+    @return 13;
+  } @else if $base-fs == 87.5% {
+    @return 14;
+  } @else if $base-fs == 93.8% {
+    @return 15;
+  } @else if $base-fs == 100% {
+    @return 16;
+  }
+}
+
+@function calc-rem($font-size-px) {
+  $font-size-rem: strip-units($font-size-px) / basefont-to-pixel($base-font-proportional-size);
+  @return $font-size-rem;
+}
+
+
+//////////////////////////
+//  string operations   //
+//////////////////////////
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}

@@ -1,0 +1,82 @@
+﻿
+body {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box; // not inherited by default
+}
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: inherit; // apply desired box model to all but allowing local change
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+dd,
+dl,
+dt,
+fieldset,
+figure,
+legend,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+main,
+li {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-size: inherit;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a,
+button,
+[type='submit'] {
+  color: inherit;
+  transition: .3s;
+}
+
+button,
+[type='submit'] {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+fieldset {
+  border-color: inherit;
+  border-style: none;
+  border-width: 0;
+}
+
+img {
+  border: 0;
+  height: auto;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

@@ -1,0 +1,35 @@
+﻿// some examples of SASS variables largely drawn from _config.scss
+
+////////////////
+//  palette   //
+////////////////
+
+$palette-main: main !default;
+$palette-mono: mono;
+
+
+//////////////////////
+//  typographical   //
+//////////////////////
+
+$base-type: base-sans-serif !default; // map in _config.scss and override in themes\*.scss
+$base-type-name: map-get(map-get($fonts, $base-type), name);
+$base-type-path: map-get(map-get($fonts, $base-type), path);
+$base-line-height: map-get(map-get($fonts, $base-type), line-height);
+$base-font-proportional-size: map-get(map-get($fonts, $base-type), size-proportional);
+$base-root-font-size: map-get(map-get($fonts, $base-type), size-root);
+$base-font-family: map-get(map-get($fonts, $base-type), family);
+
+$h1-size: 29px !default;
+$h2-size: 24px !default;
+$h3-size: 18px !default;
+$h4-size: 14px !default;
+
+$paragraph-size: 16px !default;
+
+/////////////////
+//  viewport   //
+/////////////////
+
+$min-viewport-width: 320px;
+$max-viewport-width: 1260px;

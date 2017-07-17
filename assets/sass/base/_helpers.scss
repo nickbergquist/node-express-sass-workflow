@@ -1,0 +1,12 @@
+﻿.hide { // invisible & inaudible
+  display: none;
+  visibility: hidden;
+}
+
+.off-screen { // invisible only
+  height: 1px;
+  left: -999em;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}

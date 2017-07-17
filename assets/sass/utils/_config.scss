@@ -1,0 +1,60 @@
+﻿
+//////////////
+//  fonts   //
+//////////////
+
+$fonts: (
+  base-sans-serif: (
+    name: 'OpenSans-Regular',
+    family: 'OpenSans-Regular, Arial, Helvetica, sans-serif',
+    path: '../type/OpenSans-Regular',
+    line-height: 1.5,
+    size-proportional: 62.5%, // (62.5/100)*16 : 10px : 1rem
+    size-root: 1.4rem,
+  )
+);
+
+
+////////////////
+//  palette   //
+////////////////
+
+$palettes: (
+  mono: (
+    darkest: #000,
+    darker: #333,
+    dark: #666,
+    mid: #999,
+    light: #ccc,
+    lighter: #eee,
+    lightest: #fff,
+  ),
+  main: (
+    primary: #494750,
+    secondary: #d2c6bc,
+    background: #b19d2d,
+    foreground: #748f3c,
+    accent: #9d4c3e,
+  )
+);
+
+$palette-tools: (
+  opacity: (
+    light: .75,
+    medium: .5,
+    dark: .25
+  )
+);
+
+
+//////////////////////
+//  media queries   //
+//////////////////////
+
+$breakpoints: (
+  base: 320px,
+  small: 480px,
+  medium: 768px,
+  large: 1024px,
+  full: 1280px
+);

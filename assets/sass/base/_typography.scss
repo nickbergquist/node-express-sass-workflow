@@ -1,0 +1,33 @@
+﻿// base typographical rules only 
+
+@include font-face($base-type-name, $base-type-path);
+
+body {
+  font: #{$base-root-font-size} / #{$base-line-height} #{$base-font-family};
+}
+
+html {
+  font-size: $base-font-proportional-size;
+}
+
+h1 {
+  @include font-size-margin-ratio($h1-size, 2);
+
+  color: palette-colour('main', 'accent');
+}
+
+h2 {
+  @include font-size-margin-ratio($h2-size);
+}
+
+h3 {
+  @include font-size-margin-ratio($h3-size);
+}
+
+h4 {
+  @include font-size-margin-ratio($h4-size);
+}
+
+p {
+  @include font-size-margin-ratio($paragraph-size, 1.5);
+}

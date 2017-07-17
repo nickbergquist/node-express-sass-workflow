@@ -12,13 +12,9 @@ var app = express();
 
 console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV)
 
-app.set('assets_path', (process.env.NODE_ENV === 'production') ? 'dist' : 'build');
+app.set('processed_assets_path', (process.env.NODE_ENV === 'production') ? 'dist' : 'build');
 
-console.log('assets_path : ' + app.get('assets_path'));
-
-
-
-
+console.log('processed_assets_path : ' + app.get('processed_assets_path'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, app.get('processed_assets_path'))));
 
 app.use('/', index);
 app.use('/users', users);
