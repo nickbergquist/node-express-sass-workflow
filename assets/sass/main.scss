@@ -1,0 +1,44 @@
+$success: #00C000;
+$error: #FFFF00;
+$warning: #FF0000;
+
+
+body {
+  padding: 30px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.vendor-prefix-test {
+	display: flex;
+}
+
+p {
+  color: #00B7FF;
+}
+
+.message {
+  border: 1px solid #999;
+  padding: 10px;
+}
+
+.sausages {
+  color: lighten($warning, 20%);
+}
+
+.success {
+  @extend .message;
+  border-color: $success;
+  padding: 25px
+}
+
+.error {
+  @extend .message;
+  border-color: $error;
+  padding: 50px
+}
+
+.warning {
+  @extend .message;
+  border-color: $warning;
+  padding: 75px
+}
