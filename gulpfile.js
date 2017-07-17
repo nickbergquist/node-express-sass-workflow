@@ -20,20 +20,22 @@ const gulpSourcemaps = require('gulp-sourcemaps');
 const gulpUglify = require('gulp-uglify');
 const gulpUtil = require('gulp-util');
 
+const sassOptions = {
+    errLogToConsole: true
+};
+
 var paths = {
-	srcFonts: 'src/fonts/',
-    srcHtml: 'src/views/',
-    srcSass: 'src/sass/',
-    srcJs: 'src/js/',
-    srcImg: 'src/images/',
+	srcFonts: 'assets/type/',
+    srcSass: 'assets/sass/**/*.scss',
+    srcJs: 'assets/javascripts/**/*.js',
+    srcImg: 'assets/images/',
     dirBuild: 'build/',
-    dirRev: 'build/rev/',
     dirPublish: 'dist/'
 };
 
 var nodemonInit = () => {
     gulpNodeMon({
-        script: './bin/www', 
+        script: './bin/www',
         ext: 'js'
     }).on('start', () => {
         console.log('Application started.');
@@ -48,10 +50,10 @@ var nodemonInit = () => {
 if(process.env.NODE_ENV === 'production'){
     gulp.task('default', ['publish']);
 } else {
-    gulp.task('default', ['build']);
+    gulp.task('default', ['build', 'watch']);
 }
 
-gulp.task('build', () => {
+gulp.task('build', ['dev-css'], () => {
     console.log('The build task');
     // start server
     nodemonInit();
@@ -61,4 +63,26 @@ gulp.task('publish', () => {
     console.log('The publish task');
     // start server
     nodemonInit();
+});
+
+// development: compile unminified SASS with linting and sourcemaps 
+gulp.task('dev-css', ['tear-down-css'], () => {
+    return gulp
+        .src(paths.srcSass)
+        .pipe(gulpSassLint())
+        .pipe(gulpSassLint.format())
+        .pipe(gulpSassLint.failOnError())
+        .pipe(gulpSourcemaps.init())
+        .pipe(gulpSass(sassOptions).on('error', gulpSass.logError))
+        .pipe(gulpAutoprefixer())
+        .pipe(gulpSourcemaps.write().on('end', () => gulpUtil.log('Inline sourcemap created')))
+        .pipe(gulp.dest(paths.dirBuild + 'stylesheets/').on('end', () => gulpUtil.log('Unminified CSS written to ' + paths.dirBuild + 'stylesheets/')));
+});
+
+gulp.task('tear-down-css', () => {
+	return del(paths.dirBuild + 'stylesheets/*');
+});
+
+gulp.task('watch', () => {
+    gulp.watch('assets/sass/**', ['dev-css']);
 });
