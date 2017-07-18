@@ -8,15 +8,6 @@
   @return map-get(map-get($palettes, $palette), $colour);
 }
 
-@function palette-colour-alpha($palette, $colour, $opacity) {
-  $colour: palette-colour($palette, $colour);
-
-  @if map-key-exists($palette-tools, 'opacity', $opacity) {
-    $opacity: map-get(map-get($palette-tools, 'opacity'), $opacity);
-  }
-
-  @return rgba($colour, $opacity);
-}
 
 //////////////////////
 //  typographical   //

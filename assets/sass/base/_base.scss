@@ -1,18 +1,15 @@
 ﻿body {
+  @include mq-full {
+    margin: 2rem auto 0;
+    width: $max-viewport-width;
+  }
+
   background-color: palette-colour($palette-mono, 'lightest');
   min-width: $min-viewport-width;
 }
 
 html {
   background-color: palette-colour('mono', 'dark');
-}
-
-main {
-  @include mq-full {
-    margin-left: auto;
-    margin-right: auto;
-    width: $max-viewport-width;
-  }
 }
 
 .skip {

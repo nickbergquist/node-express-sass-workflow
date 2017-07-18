@@ -12,8 +12,6 @@ html {
 
 h1 {
   @include font-size-margin-ratio($h1-size, 2);
-
-  color: palette-colour('main', 'accent');
 }
 
 h2 {
