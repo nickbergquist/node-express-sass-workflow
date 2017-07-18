@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'nabapp' });
+  res.render('index', { 
+    title: 'Home',
+    assets: (process.env.NODE_ENV === 'production') ? 'dist' : 'build',
+    date: new Date().toDateString()
+  });
 });
 
 module.exports = router;

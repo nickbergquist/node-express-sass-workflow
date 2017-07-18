@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var products = require('./routes/products');
+var about = require('./routes/about');
+var contact = require('./routes/contact');
 
 var app = express();
 
@@ -15,6 +17,7 @@ console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV)
 app.set('processed_assets_path', (process.env.NODE_ENV === 'production') ? 'dist' : 'build');
 
 console.log('processed_assets_path : ' + app.get('processed_assets_path'));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +33,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, app.get('processed_assets_path'))));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/products', products);
+app.use('/about', about);
+app.use('/contact', contact);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
