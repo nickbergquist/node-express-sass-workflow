@@ -3,12 +3,8 @@
 const del = require('del');
 const gulp = require('gulp');
 const gulpAutoprefixer = require('gulp-autoprefixer');
-const gulpChanged = require('gulp-changed');
 const gulpCleanCss = require('gulp-clean-css');
 const gulpConcat = require('gulp-concat');
-const gulpHtmlMin = require('gulp-htmlmin');
-const gulpImageMin = require('gulp-imagemin');
-const gulpLiveReload = require('gulp-livereload');
 const gulpNodeMon = require('gulp-nodemon');
 const gulpNotify = require('gulp-notify');
 const gulpPlumber = require('gulp-plumber');
@@ -26,7 +22,7 @@ const sassOptions = {
     errLogToConsole: true
 };
 
-var paths = {
+const paths = {
 	srcFonts: 'assets/type/*',
     srcSass: 'assets/sass/**/*.scss',
     srcJs: 'assets/javascripts/**/*.js',
