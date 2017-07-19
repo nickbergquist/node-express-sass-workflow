@@ -27,7 +27,7 @@ const sassOptions = {
 };
 
 var paths = {
-	srcFonts: 'assets/type/',
+	srcFonts: 'assets/type/*',
     srcSass: 'assets/sass/**/*.scss',
     srcJs: 'assets/javascripts/**/*.js',
     srcImg: 'assets/images/',
@@ -72,12 +72,12 @@ if(process.env.NODE_ENV === 'production'){
     gulp.task('default', ['clean', 'build', 'watch']);
 }
 
-gulp.task('build', ['build-css', 'build-pug'], () => {
+gulp.task('build', ['build-css', 'build-pug', 'build-fonts'], () => {
     console.log('The build task');
     nodemonInit();
 });
 
-gulp.task('publish', ['pub-css', 'pub-pug'], () => {
+gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts'], () => {
     console.log('The publish task');
     nodeInit();
 });
@@ -92,7 +92,7 @@ gulp.task('build-css', ['build-tear-down-css'], () => {
         .pipe(gulpSourcemaps.init())
         .pipe(gulpSass(sassOptions).on('error', gulpSass.logError))
         .pipe(gulpAutoprefixer())
-        .pipe(gulpSourcemaps.write().on('end', () => gulpUtil.log('Inline sourcemap created')))
+        .pipe(gulpSourcemaps.write().on('end', () => gulpUtil.log('Inline CSS sourcemap created')))
         .pipe(gulp.dest(paths.dirBuild + 'stylesheets/').on('end', () => gulpUtil.log('Unminified CSS written to ' + paths.dirBuild + 'stylesheets/')));
 });
 
@@ -115,15 +115,12 @@ gulp.task('pub-tear-down-css', () => {
 	del(paths.dirPublish + 'stylesheets/*');
 });
 
-gulp.task('tear-down-pug', () => {
-	del(paths.dirViews + '/*');
-});
 
 // development: process pug templates without minified assets
 gulp.task('build-pug', ['tear-down-pug'], () => {
     return gulp
         .src(paths.scrViews)
-        .pipe(gulp.dest(paths.dirViews));
+        .pipe(gulp.dest(paths.dirViews).on('end', () => gulpUtil.log('Views processed and written to ' + paths.dirViews)));
 });
 
 // production: process pug templates to load minified assets
@@ -131,7 +128,25 @@ gulp.task('pub-pug', ['tear-down-pug'], () => {
     return gulp
         .src(paths.scrViews)
         .pipe(gulpProcessJade())
-        .pipe(gulp.dest(paths.dirViews));
+        .pipe(gulp.dest(paths.dirViews).on('end', () => gulpUtil.log('Views processed and written to ' + paths.dirViews)));
+});
+
+gulp.task('tear-down-pug', () => {
+	del(paths.dirViews + '/*');
+});
+
+// development: process fonts
+gulp.task('build-fonts', () => {
+    return gulp
+        .src(paths.srcFonts)
+        .pipe(gulp.dest(paths.dirBuild + 'type/').on('end', () => gulpUtil.log('Fonts written to ' + paths.dirBuild + 'type/')));
+});
+
+// production: process fonts
+gulp.task('pub-fonts', () => {
+    return gulp
+        .src(paths.srcFonts)
+        .pipe(gulp.dest(paths.dirPublish + 'type/').on('end', () => gulpUtil.log('Fonts written to ' + paths.dirPublish + 'type/')));
 });
 
 // remove all assets
