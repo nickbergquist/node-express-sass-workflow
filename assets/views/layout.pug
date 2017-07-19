@@ -4,7 +4,9 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title #{title} :: My website
-    link(rel='stylesheet', href='/stylesheets/main.css')
+    // build:css stylesheets/main.min.css
+    link(rel='stylesheet', href='stylesheets/main.css')
+    // /build
   body
     a(class='skip off-screen', href='#main') Skip to content
     header(role='banner')
@@ -23,7 +25,8 @@ html(lang='en')
     main(id='main', class='main', role='main')
       block content
     footer(role='contentinfo')
-      p Footer 
-      p= date
+      p Footer
     block scripts
-      script(src='/site.js')
+      // build:js javascripts/site.min.js
+      script(src='javascripts/site.js')
+      // /build
