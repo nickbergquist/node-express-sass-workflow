@@ -12,10 +12,12 @@ var contact = require('./routes/contact');
 
 var app = express();
 
-//console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV)
 app.set('processed_assets_path', (process.env.NODE_ENV === 'production') ? 'dist' : 'build');
-//console.log('processed_assets_path : ' + app.get('processed_assets_path'));
 app.use(express.static(path.join(__dirname, app.get('processed_assets_path'))));
+//console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV);
+//console.log('processed_assets_path : ' + app.get('processed_assets_path'));
+
+app.use('/enquire', express.static(path.join(__dirname, '/node_modules/enquire.js/dist/')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
