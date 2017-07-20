@@ -22,6 +22,13 @@ const sassOptions = {
     errLogToConsole: true
 };
 
+// gulp-plumber syntax error details
+const onError = (err) => {  
+    gulpUtil.beep();
+    console.log(err.toString());
+    this.emit('end');
+};
+
 const paths = {
 	srcFonts: 'assets/type/*',
     srcSass: 'assets/sass/**/*.scss',
@@ -44,7 +51,6 @@ const nodemonInit = () => {
         gulpUtil.log(gulpUtil.colors.cyan('Application restarted.'));
     }).on('crash', () => {
         gulpUtil.log(gulpUtil.colors.red('Application crashed.'));
-        gulpNodeMon.emit('restart', 10)
     })
 };
 
@@ -96,6 +102,9 @@ gulp.task('watch', () => {
 gulp.task('build-css', ['build-tear-down-css'], () => {
     return gulp
         .src(paths.srcSass)
+        .pipe(gulpPlumber({
+            errorHandler: onError
+        }))
         .pipe(gulpSassLint())
         .pipe(gulpSassLint.format())
         .pipe(gulpSassLint.failOnError())
