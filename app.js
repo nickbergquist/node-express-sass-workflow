@@ -17,8 +17,6 @@ app.use(express.static(path.join(__dirname, app.get('processed_assets_path'))));
 //console.log('process.env.NODE_ENV : ' + process.env.NODE_ENV);
 //console.log('processed_assets_path : ' + app.get('processed_assets_path'));
 
-app.use('/enquire', express.static(path.join(__dirname, '/node_modules/enquire.js/dist/')));
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

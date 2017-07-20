@@ -39,11 +39,11 @@ const nodemonInit = () => {
         script: './bin/www',
         ext: 'js'
     }).on('start', () => {
-        console.log('Application started.');
+        gulpUtil.log(gulpUtil.colors.cyan('Application started.'));
     }).on('restart', () => {
-        console.log('Application restarted.');
+        gulpUtil.log(gulpUtil.colors.cyan('Application restarted.'));
     }).on('crash', () => {
-        console.log('Application crashed.');
+        gulpUtil.log(gulpUtil.colors.red('Application crashed.'));
         gulpNodeMon.emit('restart', 10)
     })
 };
@@ -69,15 +69,29 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 gulp.task('build', ['build-css', 'build-pug', 'build-fonts', 'build-js'], () => {
-    console.log('The build task');
+    gulpUtil.log(gulpUtil.colors.green('Application built'));
     nodemonInit();
 });
 
 gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts', 'pub-js'], () => {
-    console.log('The publish task');
+    gulpUtil.log(gulpUtil.colors.green('Application published. No watch on assets'));
     nodeInit();
 });
 
+// remove all processed assets
+gulp.task('clean', () => {
+    del([paths.dirBuild, paths.dirPublish, paths.dirViews + '/*']);
+});
+
+// development: watch tasks
+gulp.task('watch', () => {
+    gulp.watch(paths.srcSass, ['build-css']);
+    gulp.watch(paths.scrViews, ['build-pug']);
+    gulp.watch(paths.srcJs, ['build-js']);
+});
+
+
+// CSS files
 // development: compile unminified SASS with linting and sourcemaps 
 gulp.task('build-css', ['build-tear-down-css'], () => {
     return gulp
@@ -92,8 +106,13 @@ gulp.task('build-css', ['build-tear-down-css'], () => {
         .pipe(gulp.dest(paths.dirBuild + 'stylesheets/').on('end', () => gulpUtil.log('Unminified CSS written to ' + paths.dirBuild + 'stylesheets/')));
 });
 
+// development: remove processed CSS
+gulp.task('build-tear-down-css', () => {
+	del(paths.dirBuild + 'stylesheets/*');
+});
+
 // production: compile SASS with minification
-gulp.task('pub-css', ['pub-tear-down-css'], () => {
+gulp.task('pub-css', () => {
     return gulp
         .src(paths.srcSass)
         .pipe(gulpSass(sassOptions).on('error', gulpSass.logError))
@@ -103,16 +122,9 @@ gulp.task('pub-css', ['pub-tear-down-css'], () => {
         .pipe(gulp.dest(paths.dirPublish + 'stylesheets/').on('end', () => gulpUtil.log('CSS written to ' + paths.dirPublish + 'stylesheets/')));
 });
 
-gulp.task('build-tear-down-css', () => {
-	del(paths.dirBuild + 'stylesheets/*');
-});
 
-gulp.task('pub-tear-down-css', () => {
-	del(paths.dirPublish + 'stylesheets/*');
-});
-
-
-// development: process pug templates without minified assets
+// PUG files
+// development: simple copy of pug templates without minified assets
 gulp.task('build-pug', ['tear-down-pug'], () => {
     return gulp
         .src(paths.scrViews)
@@ -127,45 +139,46 @@ gulp.task('pub-pug', ['tear-down-pug'], () => {
         .pipe(gulp.dest(paths.dirViews).on('end', () => gulpUtil.log('Views processed and written to ' + paths.dirViews)));
 });
 
+// remove all processed views - same for development and production at present
 gulp.task('tear-down-pug', () => {
 	del(paths.dirViews + '/*');
 });
 
-// development: process javascript
-gulp.task('build-js', () => {
+
+// JAVASCRIPT files
+// development: process javascripts
+gulp.task('build-js', ['build-tear-down-js'], () => {
     return gulp
         .src(paths.srcJs)
         .pipe(gulp.dest(paths.dirBuild + 'javascripts/').on('end', () => gulpUtil.log('Javascripts written to ' + paths.dirBuild + 'javascripts/')));
 });
 
-// production: process javascript
-gulp.task('pub-js', () => {
-    return gulp
-        .src(paths.srcJs)
-        .pipe(gulp.dest(paths.dirPublish + 'javascripts/').on('end', () => gulpUtil.log('Javascripts written to ' + paths.dirPublish + 'javascripts/')));
+// development: remove javascripts
+gulp.task('build-tear-down-js', () => {
+	return del(paths.dirBuild + 'javascripts/*');
 });
 
-// development: process fonts
+// production: process javascripts - concatenate and minify
+gulp.task('pub-js', () => {
+    return gulp
+        .src(['assets/javascripts/static/matchMedia.js', 'assets/javascripts/static/enquire.min.js', 'assets/javascripts/site.js'])
+        .pipe(gulpConcat('site.min.js'))
+		.pipe(gulpUglify())
+        .pipe(gulp.dest(paths.dirPublish + 'javascripts/').on('end', () => gulpUtil.log('Concatenated and minified Javascripts written to ' + paths.dirPublish + 'javascripts/')));
+});
+
+
+// FONT files
+// development: process fonts - simple copy
 gulp.task('build-fonts', () => {
     return gulp
         .src(paths.srcFonts)
         .pipe(gulp.dest(paths.dirBuild + 'type/').on('end', () => gulpUtil.log('Fonts written to ' + paths.dirBuild + 'type/')));
 });
 
-// production: process fonts
+// production: process fonts - simple copy
 gulp.task('pub-fonts', () => {
     return gulp
         .src(paths.srcFonts)
         .pipe(gulp.dest(paths.dirPublish + 'type/').on('end', () => gulpUtil.log('Fonts written to ' + paths.dirPublish + 'type/')));
-});
-
-// remove all assets
-gulp.task('clean', () => {
-    del([paths.dirBuild, paths.dirPublish, paths.dirViews + '/*']);
-});
-
-// development: watch tasks
-gulp.task('watch', () => {
-    gulp.watch('assets/sass/**', ['build-css']);
-    gulp.watch('assets/views/**', ['build-pug']);
 });
