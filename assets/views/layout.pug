@@ -27,8 +27,13 @@ html(lang='en')
     footer(role='contentinfo')
       p Footer
     block scripts
-      script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+      if settings.env === 'production'
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+      else
+        script(src='javascripts/jquery-3.2.1.min.js')
+      
       script(src='/enquire/enquire.min.js')
+      
       // build:js javascripts/site.min.js
       script(src='javascripts/site.js')
       // /build

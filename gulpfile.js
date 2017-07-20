@@ -68,12 +68,12 @@ if(process.env.NODE_ENV === 'production'){
     gulp.task('default', ['clean', 'build', 'watch']);
 }
 
-gulp.task('build', ['build-css', 'build-pug', 'build-fonts'], () => {
+gulp.task('build', ['build-css', 'build-pug', 'build-fonts', 'build-js'], () => {
     console.log('The build task');
     nodemonInit();
 });
 
-gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts'], () => {
+gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts', 'pub-js'], () => {
     console.log('The publish task');
     nodeInit();
 });
@@ -129,6 +129,20 @@ gulp.task('pub-pug', ['tear-down-pug'], () => {
 
 gulp.task('tear-down-pug', () => {
 	del(paths.dirViews + '/*');
+});
+
+// development: process javascript
+gulp.task('build-js', () => {
+    return gulp
+        .src(paths.srcJs)
+        .pipe(gulp.dest(paths.dirBuild + 'javascripts/').on('end', () => gulpUtil.log('Javascripts written to ' + paths.dirBuild + 'javascripts/')));
+});
+
+// production: process javascript
+gulp.task('pub-js', () => {
+    return gulp
+        .src(paths.srcJs)
+        .pipe(gulp.dest(paths.dirPublish + 'javascripts/').on('end', () => gulpUtil.log('Javascripts written to ' + paths.dirPublish + 'javascripts/')));
 });
 
 // development: process fonts

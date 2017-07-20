@@ -2,5 +2,5 @@ extends layout
 
 block content
   h1= title
-  p Assets in /#{assets} directory
   p Date today is #{date}
+  p Environment is '#{settings.env}'. Assets are served from the /#{assets} directory
