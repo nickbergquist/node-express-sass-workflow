@@ -1,4 +1,4 @@
-﻿// some examples of SASS variables largely drawn from _config.scss
+﻿// SASS variables largely drawn from _config.scss
 
 ////////////////
 //  palette   //
@@ -6,6 +6,11 @@
 
 $palette-main: main !default;
 $palette-mono: mono;
+
+$home-colour: palette-colour($palette-main, 'primary') !default;
+$about-colour: palette-colour($palette-main, 'accent') !default;
+$work-colour: palette-colour($palette-main, 'foreground') !default;
+$contact-colour: palette-colour($palette-main, 'secondary') !default;
 
 
 //////////////////////
@@ -25,7 +30,23 @@ $h2-size: 24px !default;
 $h3-size: 18px !default;
 $h4-size: 14px !default;
 
+$nav-root-size: 18px !default;
 $paragraph-size: 16px !default;
+
+
+///////////////////
+//  navigation   //
+///////////////////
+
+$nav-main-anchor-colour: palette-colour($palette-mono, 'lightest') !default;
+
+
+///////////////////////////
+//  shadows & gradients  //
+///////////////////////////
+
+$edge-shadow-colour: palette-colour-alpha($palette-mono, 'darkest', 'light') !default;
+
 
 /////////////////
 //  viewport   //

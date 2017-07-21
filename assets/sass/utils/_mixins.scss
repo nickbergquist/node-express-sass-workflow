@@ -1,5 +1,18 @@
 ﻿// mixins
 
+////////////////
+//  palette   //
+////////////////
+
+@mixin background-plus-hover-colour($base-colour, $change: 5%) {
+  background-color: $base-colour;
+
+  &:hover {
+    background-color: darken($base-colour, $change);
+  }
+}
+
+
 //////////////////////
 //  media queries   //
 //////////////////////

@@ -26,7 +26,6 @@ const sassOptions = {
 const onError = (err) => {  
     gulpUtil.beep();
     console.log(err.toString());
-    this.emit('end');
 };
 
 const paths = {

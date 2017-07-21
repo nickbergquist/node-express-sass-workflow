@@ -1,1 +1,65 @@
 ﻿// styles for site navigation
+nav {
+  @include mq-base {
+    height: 1px;
+    left: -999em;
+    position: absolute;
+    width: auto;
+    z-index: 1;
+
+    &.active {
+      height: auto;
+      left: auto;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  @include mq-small {
+    & li {
+      display: table-cell;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    & ul {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+    }
+  }
+
+  padding-bottom: 1rem;
+  text-align: center;
+
+  & a {
+    color: $nav-main-anchor-colour;
+    display: block;
+    padding: .5rem percentage(20/strip-units($max-viewport-width));
+  }
+
+  & .anchor-home {
+    & a {
+      @include background-plus-hover-colour($home-colour);
+    }
+  }
+
+  & .anchor-about {
+    & a {
+      @include background-plus-hover-colour($about-colour);
+    }
+  }
+
+  & .anchor-work {
+    & a {
+      @include background-plus-hover-colour($work-colour);
+    }
+  }
+
+  & .anchor-contact {
+    & a {
+      @include background-plus-hover-colour($contact-colour);
+    }
+  }
+}
+
