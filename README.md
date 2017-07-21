@@ -54,7 +54,7 @@ Running the ```publish``` task performs the same build process except that the f
 The filenames of the files generated reflect the **production** build i.e., ```main.min.css``` and ```site.min.js```
 
 **Note**:
-In both **development** and **production** builds the pug view templates are copied across from the ```assets/``` directory to the ```views/``` directory. At present the only processing of these view templates is switching the filename of the processed CSS resource in **layout.pug** to add the '.min' suffix. This is done using a 'HTML build block processor, namely the module ```gulp-processjade```. Just for comparison this process has not been extended to management of the path to the Javascript files in **layout.pug**, instead an express conditional block has been used.
+In both **development** and **production** builds the pug view templates are copied across from the ```assets/``` directory to the ```views/``` directory. At present the only processing of these view templates is switching the filename of the processed CSS resource in **layout.pug** to add the '.min' suffix. This is done using a 'HTML build block processor, namely the module [```gulp-processjade```](https://www.npmjs.com/package/gulp-processjade). Just for comparison this process has not been extended to management of the path to the Javascript files in **layout.pug**, instead a pug conditional block has been used.
 
 ### Gulp clean task
 
