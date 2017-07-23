@@ -85,7 +85,7 @@ gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts', 'pub-js'], () => {
 
 // remove all processed assets
 gulp.task('clean', () => {
-    del([paths.dirBuild, paths.dirPublish, paths.dirViews + '/*']);
+    del([paths.dirBuild, paths.dirPublish, paths.dirViews]);
 });
 
 // development: watch tasks
