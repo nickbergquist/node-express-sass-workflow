@@ -8,9 +8,9 @@ $palette-main: main !default;
 $palette-mono: mono;
 
 $home-colour: palette-colour($palette-main, 'primary') !default;
-$about-colour: palette-colour($palette-main, 'accent') !default;
-$work-colour: palette-colour($palette-main, 'foreground') !default;
-$contact-colour: palette-colour($palette-main, 'secondary') !default;
+$products-colour: palette-colour($palette-main, 'secondary') !default;
+$about-colour: palette-colour($palette-main, 'background') !default;
+$contact-colour: palette-colour($palette-main, 'foreground') !default;
 
 
 //////////////////////
@@ -25,20 +25,20 @@ $base-font-proportional-size: map-get(map-get($fonts, $base-type), size-proporti
 $base-root-font-size: map-get(map-get($fonts, $base-type), size-root);
 $base-font-family: map-get(map-get($fonts, $base-type), family);
 
-$h1-size: 29px !default;
-$h2-size: 24px !default;
-$h3-size: 18px !default;
+$h1-size: 21px !default;
+$h2-size: 18px !default;
+$h3-size: 16px !default;
 $h4-size: 14px !default;
 
 $nav-root-size: 18px !default;
 $paragraph-size: 16px !default;
 
 
-///////////////////
-//  navigation   //
-///////////////////
+///////////////
+//  inputs   //
+///////////////
 
-$nav-main-anchor-colour: palette-colour($palette-mono, 'lightest') !default;
+$button-nav-colour: palette-colour($palette-main, 'foreground') !default;
 
 
 ///////////////////////////
@@ -46,7 +46,7 @@ $nav-main-anchor-colour: palette-colour($palette-mono, 'lightest') !default;
 ///////////////////////////
 
 $edge-shadow-colour: palette-colour-alpha($palette-mono, 'darkest', 'light') !default;
-
+$simple-text-shadow: 0 0 1px palette-colour($palette-mono, 'lightest') !default;
 
 /////////////////
 //  viewport   //

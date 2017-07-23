@@ -4,8 +4,9 @@
 //  palette   //
 ////////////////
 
-@mixin background-plus-hover-colour($base-colour, $change: 5%) {
+@mixin background-plus-hover-colour($base-colour, $change: 10%) {
   background-color: $base-colour;
+  color: lighten($base-colour, 20%);
 
   &:hover {
     background-color: darken($base-colour, $change);

@@ -12,6 +12,10 @@ html {
   background-color: palette-colour('mono', 'dark');
 }
 
+main {
+  padding: 1.2rem percentage(20/strip-units($max-viewport-width));
+}
+
 .skip {
   &:active {
     position: static;

@@ -2,4 +2,10 @@
 
 footer {
   background-color: palette-colour('main', 'foreground');
+  padding: 1.2rem percentage(20/strip-units($max-viewport-width));
+
+  & p {
+    color: palette-colour($palette-mono, 'lightest');
+    margin-bottom: 0;
+  }
 }

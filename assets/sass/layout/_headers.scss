@@ -2,5 +2,19 @@
 
 header {
   background-color: palette-colour('main', 'accent');
-  min-height: 10rem;
+  color: palette-colour('mono', 'lightest');
+  overflow: hidden;
+  padding: 1.2rem 0 0;
+
+  & .strapline {
+    margin: .5rem percentage(20/strip-units($max-viewport-width)) 1rem;
+  }
+
+  & .logo {
+    border: 1px dotted palette-colour('mono', 'lightest');
+    color: palette-colour('mono', 'lightest');
+    display: inline-block;
+    margin-left: percentage(20/strip-units($max-viewport-width));
+    padding: 2rem 8rem;
+  }
 }

@@ -7,20 +7,20 @@ html(lang='en')
     // build:css stylesheets/main.min.css
     link(rel='stylesheet', href='stylesheets/main.css')
     // /build
-  body
+  body(class= bodyclass)
     a(class='skip off-screen', href='#main') Skip to content
     header(role='banner')
-      a(href='/') My website
-      p Strapline text
+      a(href='/', class='logo') Logo
+      p(class='strapline') Site strapline text
       nav(id='nav-site', role='navigation')
         ul
-          li
+          li(class='anchor-home' + (title === 'Home' ? ' active' : ''))
               a(href='/') Home
-          li
+          li(class='anchor-products' + (title === 'Products' ? ' active' : ''))
               a(href='/products') Products
-          li
+          li(class='anchor-about' + (title === 'About' ? ' active' : ''))
               a(href='/about') About
-          li
+          li(class='anchor-contact' + (title === 'Contact' ? ' active' : ''))
               a(href='/contact') Contact
     main(id='main', class='main', role='main')
       block content

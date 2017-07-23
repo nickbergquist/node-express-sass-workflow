@@ -1,7 +1,10 @@
 ﻿
 // styles for HTML input elements
 .nav-button-show {
+  @include background-plus-hover-colour($button-nav-colour);
+
+  padding: 2.2rem .5rem;
   position: absolute;
-  right: 1rem;
-  top: 1rem;
+  right: percentage(20/strip-units($max-viewport-width));
+  top: 1.2rem;
 }

@@ -29,18 +29,22 @@ nav {
     }
   }
 
-  padding-bottom: 1rem;
   text-align: center;
 
   & a {
-    color: $nav-main-anchor-colour;
     display: block;
-    padding: .5rem percentage(20/strip-units($max-viewport-width));
+    padding: 1.2rem percentage(20/strip-units($max-viewport-width));
   }
 
   & .anchor-home {
     & a {
       @include background-plus-hover-colour($home-colour);
+    }
+  }
+
+  & .anchor-products {
+    & a {
+      @include background-plus-hover-colour($products-colour);
     }
   }
 
@@ -50,15 +54,16 @@ nav {
     }
   }
 
-  & .anchor-work {
-    & a {
-      @include background-plus-hover-colour($work-colour);
-    }
-  }
-
   & .anchor-contact {
     & a {
       @include background-plus-hover-colour($contact-colour);
+    }
+  }
+
+  & .active {
+    & a {
+      color: palette-colour($palette-mono, 'lightest');
+      font-weight: bold;
     }
   }
 }
