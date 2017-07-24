@@ -7,6 +7,7 @@ header {
   padding: 1.2rem 0 0;
 
   & .strapline {
+    font-style: italic;
     margin: .5rem percentage(20/strip-units($max-viewport-width)) 1rem;
   }
 

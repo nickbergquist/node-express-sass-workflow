@@ -12,6 +12,9 @@ html {
 
 h1 {
   @include font-size-margin-ratio($h1-size, 2);
+
+  font-variant: small-caps;
+  text-transform: capitalize;
 }
 
 h2 {
