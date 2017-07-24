@@ -70,9 +70,17 @@ var siteNavBehaviour = {
         }
     },
     navExpanded: function () {
-        $('#nav-site').removeClass('active');
-        if ($('header .nav-button-show').length) {
-            $('header .nav-button-show').remove();
+        var $header = $('header');
+        var $headerNav = $('#nav-site');
+        
+        $headerNav.removeClass('active');
+
+        $headerNav.find('a[tabindex]').each(function () {
+            $(this).removeAttr('tabindex');
+        });
+
+        if ($header.find('.nav-button-show')) {
+            $header.find('.nav-button-show').remove();
         }
     }
 };
