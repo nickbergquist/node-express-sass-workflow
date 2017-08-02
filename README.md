@@ -1,6 +1,6 @@
 # nabapp
 
-A [Node](https://nodejs.org/en/) web application served with [Express](https://expressjs.com/) and [Pug](https://pugjs.org/) template views. This is an extension on the application build provided by the Express  ```express-generator tool``` available at [https://expressjs.com/en/starter/generator.html](https://expressjs.com/en/starter/generator.html) for creating alternate builds that run in either ```NODE_ENV``` **development** or **production** environments. The build process and starting of the application is handled with [Gulp](http://gulpjs.com/). There is also a full SASS integration included with some basic styling.
+A [Node](https://nodejs.org/en/) web application served with [Express](https://expressjs.com/) and [Pug](https://pugjs.org/) template views. This is an extension on the application build provided by the Express  ```express-generator tool``` available at [https://expressjs.com/en/starter/generator.html](https://expressjs.com/en/starter/generator.html) for creating alternate builds that run in either ```NODE_ENV``` **development** or **production** environments. The build process and starting of the application is handled with [Gulp](http://gulpjs.com/). There is also a full SASS integration included with some basic layout styling and an example of how you can incorporate typographical vertical spacing or rhythm in the HTML5 ```<main>``` page element.
 
 ## Install dependencies
 
