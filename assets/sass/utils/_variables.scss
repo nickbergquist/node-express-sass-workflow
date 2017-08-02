@@ -20,10 +20,11 @@ $contact-colour: palette-colour($palette-main, 'foreground') !default;
 $base-type: base-sans-serif !default; // map in _config.scss and override in themes\*.scss
 $base-type-name: map-get(map-get($fonts, $base-type), name);
 $base-type-path: map-get(map-get($fonts, $base-type), path);
-$base-line-height: map-get(map-get($fonts, $base-type), line-height);
-$base-font-proportional-size: map-get(map-get($fonts, $base-type), size-proportional);
-$base-root-font-size: map-get(map-get($fonts, $base-type), size-root);
 $base-font-family: map-get(map-get($fonts, $base-type), family);
+$base-font-proportional-size: map-get(map-get($fonts, $base-type), size-proportional);
+$base-line-height: map-get(map-get($fonts, $base-type), line-height);
+$base-root-font-size: map-get(map-get($fonts, $base-type), size-root);
+$base-typographical-height-unit: map-get(map-get($fonts, $base-type), typographical-base-unit);
 
 $h1-size: 21px !default;
 $h2-size: 18px !default;
@@ -31,7 +32,6 @@ $h3-size: 16px !default;
 $h4-size: 14px !default;
 
 $nav-root-size: 18px !default;
-$paragraph-size: 16px !default;
 
 
 ///////////////

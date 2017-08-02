@@ -3,7 +3,9 @@
 @include font-face($base-type-name, $base-type-path);
 
 body {
-  font: #{$base-root-font-size} / #{$base-line-height} #{$base-font-family};
+  font-family: #{$base-font-family};
+  font-size: calc-rem($base-root-font-size)#{'rem'};
+  line-height: $base-line-height;
 }
 
 html {
@@ -11,24 +13,21 @@ html {
 }
 
 h1 {
-  @include font-size-margin-ratio($h1-size, 2);
-
-  font-variant: small-caps;
-  text-transform: capitalize;
+  @include heading-vertical-rhythm($h1-size, $top-margin: 0);
 }
 
 h2 {
-  @include font-size-margin-ratio($h2-size);
+  @include heading-vertical-rhythm($h2-size);
 }
 
 h3 {
-  @include font-size-margin-ratio($h3-size);
+  @include heading-vertical-rhythm($h3-size);
 }
 
 h4 {
-  @include font-size-margin-ratio($h4-size);
+  @include heading-vertical-rhythm($h4-size);
 }
 
 p {
-  @include font-size-margin-ratio($paragraph-size, 1.5);
+  margin-bottom: $base-line-height#{'rem'};
 }

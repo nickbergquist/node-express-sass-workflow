@@ -65,33 +65,30 @@
   }
 }
 
-/// Converts font-size to rem units. Provides default margin-bottom as a proportional value based on the font-size and line-height.
-/// @param $font-size-px - font size as pixels
-/// @param $bottom-margin-adjust - optional value from 0 (no margin-bottom) to 2 (margin-bottom adjustments)
-/// @return - font-size in rem units and default or configurable margin-bottom 
-@mixin font-size-margin-ratio($font-size-px, $bottom-margin-adjust: null) {
+/// adds vertical spacing to headings determined by base typography of font size and leading.
+/// @param $top-margin - set to 0 no top spacing and recalculated bottom spacing
+@mixin heading-vertical-rhythm($font-size-px, $top-margin: null) {
   $font-size-rem: calc-rem($font-size-px);
-  font-size: #{$font-size-rem}#{'rem'};
+  $single-vertical-margin: $base-typographical-height-unit / $font-size-px;
 
-  @if $bottom-margin-adjust == 0 {
-    $margin: null;
-  } @else if $bottom-margin-adjust == 2 {
-    $margin: ($base-line-height / $font-size-rem) * 2;
-    margin-bottom: #{$margin}#{'rem'};
-  } @else if $bottom-margin-adjust == 1 {
-    $margin: ($base-line-height / $font-size-rem);
-    margin-bottom: #{$margin}#{'rem'};
-  } @else if $bottom-margin-adjust == 1.5 {
-    $margin: ($base-line-height / $font-size-rem) * 1.5;
-    margin-bottom: #{$margin}#{'rem'};
-  } @else if $bottom-margin-adjust == .5 {
-    $margin: ($base-line-height / $font-size-rem) / 2;
-    margin-bottom: #{$margin}#{'rem'};
-  } @else if $bottom-margin-adjust == .25 {
-    $margin: ($base-line-height / $font-size-rem) / 4;
-    margin-bottom: #{$margin}#{'rem'};
-  } @else if $bottom-margin-adjust == null {
-    $margin: $base-line-height / $font-size-rem;
-    margin-bottom: #{$margin}#{'rem'};
+  // leading of heading is doubled for font sizes greater than the base typographical unit
+  $heading-line-height: '';
+  @if $font-size-px > $base-typographical-height-unit {
+    $heading-line-height: $single-vertical-margin * 2;
+  } @else {
+    $heading-line-height: $single-vertical-margin;
+  }
+
+  $margin-bottom: ($single-vertical-margin) * .5;
+  $margin-top: ($single-vertical-margin) * .5; // reduced multiplication factor to allow for bottom margins of preceding elements 
+
+  font-size: #{$font-size-rem}#{'rem'};
+  line-height: $heading-line-height;
+
+  @if $top-margin == 0 {
+    margin-bottom: #{$single-vertical-margin}#{'em'};
+  } @else if $top-margin == null {
+    margin-bottom: #{$margin-bottom}#{'em'};
+    padding-top: #{$margin-top}#{'em'};
   }
 }
