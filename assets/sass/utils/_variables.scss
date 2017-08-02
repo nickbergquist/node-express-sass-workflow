@@ -1,5 +1,19 @@
 ﻿// SASS variables largely drawn from _config.scss
 
+///////////////
+//  images   //
+///////////////
+
+// Note the height of this image has been set to the current value of the 
+// variable $base-typographical-height-unit which is declared in the 'typographical'
+// section below. The value itself is currently set to 21px, derived in _config.scss
+// The background image, giving a horizontal line at every 21px down the screen, provides a
+// readily visible indication of the basic typographical unit height to which all typographical
+// elements should align. If you change the calculated unit in _config.scss then you will need
+// to create a new image of the new height format to check your vertical alignment/rhythm.
+$background-main: '../images/underline_5x21.png' !default;
+
+
 ////////////////
 //  palette   //
 ////////////////
