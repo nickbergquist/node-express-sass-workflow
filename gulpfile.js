@@ -32,7 +32,7 @@ const paths = {
 	srcFonts: 'assets/type/*',
     srcSass: 'assets/sass/**/*.scss',
     srcJs: 'assets/javascripts/**/*.js',
-    srcImg: 'assets/images/',
+    srcImg: 'assets/images/**/*.{png,jpg}',
     scrViews: 'assets/views/**/*.pug',
     dirViews: 'views/',
     dirBuild: 'build/',
@@ -73,12 +73,12 @@ if(process.env.NODE_ENV === 'production'){
     gulp.task('default', ['clean', 'build', 'watch']);
 }
 
-gulp.task('build', ['build-css', 'build-pug', 'build-fonts', 'build-js'], () => {
+gulp.task('build', ['build-css', 'build-pug', 'build-fonts', 'build-js', 'build-images'], () => {
     gulpUtil.log(gulpUtil.colors.green('Application built'));
     nodemonInit();
 });
 
-gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts', 'pub-js'], () => {
+gulp.task('publish', ['pub-css', 'pub-pug', 'pub-fonts', 'pub-js', 'pub-images'], () => {
     gulpUtil.log(gulpUtil.colors.green('Application published. No watch on assets'));
     nodeInit();
 });
@@ -190,3 +190,20 @@ gulp.task('pub-fonts', () => {
         .src(paths.srcFonts)
         .pipe(gulp.dest(paths.dirPublish + 'type/').on('end', () => gulpUtil.log('Fonts written to ' + paths.dirPublish + 'type/')));
 });
+
+
+// IMAGE files
+// development: process images - simple copy
+gulp.task('build-images', () => {
+    return gulp
+        .src(paths.srcImg)
+        .pipe(gulp.dest(paths.dirBuild + 'images/').on('end', () => gulpUtil.log('Images written to ' + paths.dirBuild + 'images/')));
+});
+
+// production: process images - simple copy
+gulp.task('pub-images', () => {
+    return gulp
+        .src(paths.srcImg)
+        .pipe(gulp.dest(paths.dirPublish + 'images/').on('end', () => gulpUtil.log('Images written to ' + paths.dirPublish + 'images/')));
+});
+

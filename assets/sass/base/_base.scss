@@ -13,6 +13,7 @@ html {
 }
 
 main {
+  background: url('#{$background-main}');
   min-height: 35rem;
   padding: 1.2rem percentage(20/strip-units($max-viewport-width));
 }
